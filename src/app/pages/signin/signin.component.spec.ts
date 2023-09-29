@@ -1,19 +1,35 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SigninComponent } from './signin.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
   let fixture: ComponentFixture<SigninComponent>;
   let page :any;
 
-  beforeEach(() => {
-    TestBed.configureTestingModule({
+  const modules = [
+    MatButtonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    CommonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule
+];
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       declarations: [SigninComponent],
       imports:[
-        ReactiveFormsModule
+        modules
       ]
-    });
+    }).compileComponents();
     fixture = TestBed.createComponent(SigninComponent);
 
     component = fixture.componentInstance;
@@ -22,6 +38,7 @@ describe('SigninComponent', () => {
     fixture.detectChanges();
   });
 
+  console.log(page);
   describe('given form',()=>{
     it('when email is empty, then recover password button should be disabled',()=>{
       setEmail(''),
@@ -56,10 +73,10 @@ describe('SigninComponent', () => {
       expect(loginButton().disabled).toBeTruthy();
     })
 
-    it('when password is not empty, then login button should be disabled',()=>{
+    it('when password is not empty, then login button should be enabled',()=>{
       setEmail('valid@gmail.com'),
       setPassword('anypassword'),
-      expect(loginButton().disabled).toBeTruthy();
+      expect(loginButton().disabled).toBeFalsy();
     })
   })
 
@@ -74,11 +91,11 @@ function setPassword(value:string){
 }
 
 function recoverPasswordButton() {
-  return page.querySelector('[test-id="recover-password-button]');
+  return page.querySelector('[test-id="recover-password-button"]');
 }
 
 function loginButton() {
-  return page.querySelector('[test-id="login-button]');
+  return page.querySelector('[test-id="login-button"]');
 }
 
 
