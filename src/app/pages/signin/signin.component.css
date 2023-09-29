@@ -19,7 +19,7 @@ form{
     margin: 10px 0;
   }
 
-  button{
+  :is(button){
     margin: 5px 0;
 
     &[mat-button]{
