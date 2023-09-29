@@ -18,6 +18,7 @@ form{
     width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
     margin: 10px 0;
   }
+
   button{
     margin: 5px 0;
 
